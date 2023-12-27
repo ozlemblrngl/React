@@ -18,10 +18,10 @@ export default function Dashboard() {
                 <Grid.Column width={12}>
                     <BrowserRouter>
                         <Routes>
-                            <Route exact path='/' Component={List}/>
-                            <Route exact path='/products' Component={List}/>
-                            <Route path='/products/:id' Component={ProductDetail}/>
-                            <Route path='/cart' Component={CartDetail}/>
+                            <Route exact path='/' element={<List/>}/>
+                            <Route exact path='/products' element={<List/>}/>
+                            <Route path='/products/:id' element={<ProductDetail/>}/>
+                            <Route path='/cart' element={<CartDetail/>}/>
                         </Routes>
                     </BrowserRouter>  
                 </Grid.Column>
