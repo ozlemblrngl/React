@@ -74,8 +74,8 @@ const AddProduct: React.FC = () => {
         </Form>
       </Formik>
       </div> 
+  </div>
 </div>
-        </div>
       
   );
 };
