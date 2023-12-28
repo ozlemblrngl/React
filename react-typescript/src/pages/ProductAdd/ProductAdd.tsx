@@ -1,67 +1,83 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { ProductModel } from '../../models/responses/ProductModel';
 
-export default function AddProduct(props: any) {
-  const [newProduct, setNewProduct] = useState({
-    id: 0,
-    images: ' ',
-    title: '',
-    brand: '',
-    thumbnail: '',
-    description: '',
-    category: '',
-    stock: 0,
-    rating: 0,
-    price: '',
-    discountPercentage: 0,
-  });
+interface NewProductFormValues {
+  title: string;
+  images: string;
+  price: string;
+  description: string;
+  category: string;
+}
+
+const AddProduct: React.FC = () => {
   const navigate = useNavigate();
 
-  const onChangeInput = (input: any) => {
-    const { name, value } = input.target;
-    setNewProduct({ ...newProduct, [name]: value });
+  const initialValues: NewProductFormValues = {
+    title: '',
+    images: '',
+    price: '',
+    description: '',
+    category: '',
   };
 
-  const handleAddProduct = () => {
-    navigate('/products/new', { state: newProduct });
+  const onSubmit = (values: NewProductFormValues) => {
+    navigate('/products/new', { state: values });
   };
 
   return (
     <div>
-      <h2>Ürün Ekle</h2>
-      <form>
-        <div className="form-group">
-          <label>Ürün Adı:</label>
-          <input type="text" className="form-control" name="title" value={newProduct.title} onChange={onChangeInput} />
-        </div>
+      <div className="row mb-3">
+        <div className="col-4 offset-4 ">
+        <h2 style={{ textAlign: 'center' }} className='center'>Ürün Ekle</h2>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+      >
+        <Form>
+          <div className="form-group">
+            <label>Ürün Adı:</label>
+            <Field type="text" className="form-control" name="title" />
+            <ErrorMessage name="title" component="div" />
+          </div>
 
-        <div className="form-group">
-          <label>Resim:</label>
-          <input type="file" className="form-control" name="images" value={newProduct.images} onChange={onChangeInput} />
-        </div>
+          <div className="form-group">
+            <label>Resim:</label>
+            <Field type="file" className="form-control" name="images" />
+            <ErrorMessage name="images" component="div" />
+          </div>
 
-        <div className="form-group">
-          <label>Fiyat:</label>
-          <input type="text" className="form-control" name="price" value={newProduct.price} onChange={onChangeInput} />
-        </div>
+          <div className="form-group">
+            <label>Fiyat:</label>
+            <Field type="text" className="form-control" name="price" />
+            <ErrorMessage name="price" component="div" />
+          </div>
 
-        <div className="form-group">
-          <label>Açıklama:</label>
-          <input type="text" className="form-control" name="description" value={newProduct.description} onChange={onChangeInput} />
-        </div>
+          <div className="form-group">
+            <label>Açıklama:</label>
+            <Field type="text" className="form-control" name="description" />
+            <ErrorMessage name="description" component="div" />
+          </div>
 
-        <div className="form-group">
-          <label>Kategori:</label>
-          <input type="text" className="form-control" name="category" value={newProduct.category} onChange={onChangeInput} />
-        </div>
+          <div className="form-group">
+            <label>Kategori:</label>
+            <Field type="text" className="form-control" name="category" />
+            <ErrorMessage name="category" component="div" />
+          </div>
 
-        <div className="d-flex justify-content-end mt-4">
-          <button type="button" className="btn btn-primary" onClick={handleAddProduct}>
-            <i className="fa fa-save mr-2"></i>Ekle
-          </button>
+          <div className="d-flex justify-content-end mt-4">
+            <button type="submit" className="btn btn-primary">
+              <i className="fa fa-save mr-2"></i>Ekle
+            </button>
+          </div>
+        </Form>
+      </Formik>
+      </div> 
+</div>
         </div>
-      </form>
-    </div>
+      
   );
-}
+};
+
+export default AddProduct;
