@@ -1,0 +1,10 @@
+.container {
+    margin-top: 20px;
+  }
+  
+.list-group-item {
+    background-color: rgb(144, 253, 255);
+    border-radius:10%;
+    border-color:rgb(24, 37, 30);
+}
+  
