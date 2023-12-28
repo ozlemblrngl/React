@@ -23,6 +23,7 @@ const AddProduct: React.FC = () => {
   };
 
   const onSubmit = (values: NewProductFormValues) => {
+    console.log('form çalışıyor:', values)
     navigate('/products/new', { state: values });
   };
 
