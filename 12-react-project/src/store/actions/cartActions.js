@@ -1,6 +1,7 @@
 import React from 'react'
 
-export const ADD_TO_CART =  "ADD_TO-CART"
+export const ADD_TO_CART =  "ADD_TO-CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 export  function addToCart(product) {
   return {
@@ -9,7 +10,7 @@ export  function addToCart(product) {
   } 
 }
 
-export function removeFromCart(){
+export function removeFromCart(product){
     return{
         type: REMOVE_FROM_CART,
         payload: product

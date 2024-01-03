@@ -1,42 +1,41 @@
-import React, {useState} from 'react'
-import { Container, Menu} from 'semantic-ui-react'
-import CartSummary from './CartSummary'
-import SignedOut from './SignedOut'
-import SignedIn from './SignedIn'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Container, Menu } from 'semantic-ui-react';
+import CartSummary from './CartSummary';
+import SignedOut from './SignedOut';
+import SignedIn from './SignedIn';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
+export default function Navi() {
+  const { cartItems } = useSelector((state) => state.cart);
+  const [isAuthenticated, setIsAuthencated] = useState(true);
+  const navigate = useNavigate();
 
-export default function Navi() { 
-  const [isAuthenticated, setIsAuthencated] = useState(true)
-  // const navigate = useNavigate()
- 
-
-  function handleSignOut(params){
+  function handleSignOut(params) {
     setIsAuthencated(false);
-    // navigate("/");
+    navigate('/');
   }
 
-  function handleSignIn(params){
+  function handleSignIn(params) {
     setIsAuthencated(true);
   }
+
   return (
     <div>
-        <Menu inverted fixed="top">
-            <Container>
-            <Menu.Item
-          name='home'
-        />
-        <Menu.Item
-          name='messages'
-        />
-        <Menu.Menu position='right'>
-            <CartSummary/>
-            {
-           isAuthenticated ? <SignedIn signOut={handleSignOut}/>:<SignedOut signIn={handleSignIn}/>  
-            }                
-        </Menu.Menu>
-            </Container>      
+      <Menu inverted fixed="top">
+        <Container>
+          <Menu.Item name="home" />
+          <Menu.Item name="messages" />
+          <Menu.Menu position="right">
+            {cartItems.length>0 && <CartSummary />}
+            {isAuthenticated ? (
+              <SignedIn signOut={handleSignOut} />
+            ) : (
+              <SignedOut signIn={handleSignIn} />
+            )}
+          </Menu.Menu>
+        </Container>
       </Menu>
     </div>
-  )
-}   
+  );
+}

@@ -1,10 +1,15 @@
 import React, {useState, useEffect}  from 'react';
-import { Icon, Menu, Table } from 'semantic-ui-react';
+import { Icon, Menu, Table, Button } from 'semantic-ui-react';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/actions/cartActions';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function List() {
+
+  const dispatch = useDispatch()
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -15,6 +20,12 @@ export default function List() {
       })
       .catch((e) => console.log(e));
   }, []);
+
+  const handleAddToCart= (product)=>{
+    dispatch(addToCart(product));
+    toast.success(`${product.title} sepete eklendi`)
+
+  }
 
   return (
 
@@ -40,6 +51,7 @@ export default function List() {
           <Table.Cell>{product.category}</Table.Cell>
           <Table.Cell>{product.description}</Table.Cell>
           <Table.Cell>{product.price}</Table.Cell>  
+          <Table.Cell><Button onClick={() =>handleAddToCart(product)}>Sepete ekle</Button></Table.Cell>
       </Table.Row>
         ))
 }
