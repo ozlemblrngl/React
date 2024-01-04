@@ -2,11 +2,12 @@ import React from 'react';
 import Categories from './Categories';
 import { Grid } from 'semantic-ui-react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import List from './List'
-import ProductDetail from './ProductDetail';
-import CartDetail from './CartDetail';
+import List from '../pages/List'
+import ProductDetail from '../pages/ProductDetail';
+import CartDetail from '../pages/CartDetail';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProductAdd from '../pages/ProductAdd';
 
 export default function Dashboard() {
   return (
@@ -23,6 +24,7 @@ export default function Dashboard() {
                             <Route exact path='/products' element={<List/>}/>
                             <Route path='/products/:id' element={<ProductDetail/>}/>
                             <Route path='/cart' element={<CartDetail/>}/>
+                            <Route path='/product/add' element={<ProductAdd/>}/>
                         </Routes>    
                 </Grid.Column>
             </Grid.Row>      
