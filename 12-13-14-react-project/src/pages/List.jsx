@@ -38,7 +38,6 @@ export default function List() {
         <Table.HeaderCell>Kategori</Table.HeaderCell>
         <Table.HeaderCell>Açıklama</Table.HeaderCell>
         <Table.HeaderCell>Ürün Fiyatı</Table.HeaderCell>
-        
       </Table.Row>
     </Table.Header>
 
