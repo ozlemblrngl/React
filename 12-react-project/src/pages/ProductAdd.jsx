@@ -1,30 +1,27 @@
 import React from 'react';
-import { Formik, Form, Field} from 'formik';
-import {FormField, Button} from 'semantic-ui-react'
-import * as Yup from "yup"
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Label, FormField, Button } from 'semantic-ui-react';
+import * as Yup from "yup";
+import KodlamaIoTextInput from '../utilities/customFormControls/KodlamaIoTextInput';
 
 export default function ProductAdd() {
-  const initialValues ={title: "", price:10}
+  const initialValues = { title: "", price: 10 }
   const schema = Yup.object({
-    title: Yup.string().required("ürün adı zorunlu"),
-    price: Yup.number().required("ürün fiyatı zorunlu")
-  })
-   
+    title: Yup.string().required("Ürün adı zorunlu"),
+    price: Yup.number().required("Ürün fiyatı zorunlu")
+  });
+
   return (
- 
-        <Formik 
-        initialValues = {initialValues}
-        validationShema= {schema}
-        onSubmit={(values)=>{ console.log(values)}}>
-        <Form className='ui form'>
-            <FormField>
-                <Field name="title" placeholder="ürün adı"></Field>
-            </FormField>
-            <FormField>
-                <Field name="price" placeholder="ürün fiyatı"></Field>
-            </FormField>
-            <Button color="green" type="submit">Ekle</Button>
-        </Form>
-        </Formik>
-  )
+    <Formik
+      initialValues={initialValues}
+      validationSchema={schema}  
+      onSubmit={(values) => { console.log(values) }}
+    >
+      <Form className='ui form'>
+        <KodlamaIoTextInput name="title" placeholder="ürün adı"/>
+        <KodlamaIoTextInput name="price" placeholder="ürün fiyatı"/>
+        <Button color="green" type="submit">Ekle</Button>
+      </Form>
+    </Formik>
+  );
 }
