@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import {HttpStatusCode} from "axios";
 import {useDispatch} from "react-redux";
-import {addToCart, removeFromCart} from "../../App/store/cartSlice";
+import {addToCart} from "../../store/slices/cartSlice";
 
 type Props = {
 	product: ProductModel;
@@ -13,6 +13,8 @@ type Props = {
 };
 // Formik - YUP
 const ProductCard = (props: Props) => {
+	const dispatch = useDispatch();
+
 	const deleteProduct = async () => {
 		try {
 			let response = await ProductService.delete(250);
@@ -25,9 +27,8 @@ const ProductCard = (props: Props) => {
 		}
 	};
 
-	const dispatch = useDispatch();
 	const addProductToCart = () => {
-		dispatch(addToCart(props.product));
+		dispatch(addToCart({product: props.product}));
 	};
 
 	return (
