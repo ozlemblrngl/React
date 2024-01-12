@@ -10,6 +10,7 @@ const Homepage = (props: Props) => {
 
 	useEffect(() => {
 		fetchProducts();
+		AuthService.login({username:"kdsdk", password:"123"})
 	}, []);
 
 	const onProductDelete = (id: number) => {
@@ -17,7 +18,9 @@ const Homepage = (props: Props) => {
 	};
 
 	const fetchProducts = () => {
+		console.log("istek homepage e attılıyor.")
 		ProductService.getAll().then((response: any) => {
+			console.log("cevap homepage'e döndü")
 			setProducts(response.data.products);
 		});
 	};
